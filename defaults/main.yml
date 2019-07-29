@@ -1,0 +1,32 @@
+---
+# defaults file for bcacheira.dokuwiki
+# Version to install
+dokuwiki_version: stable # [stable, old_stable, development]
+dokuwiki_stable_url: https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+dokuwiki_old_stable_url: https://download.dokuwiki.org/src/dokuwiki/dokuwiki-oldstable.tgz
+dokuwiki_development_url: http://github.com/splitbrain/dokuwiki/tarball/master
+# Where to install
+dokuwiki_basedir: /var/www/dokuwiki
+dokuwiki_user: nginx
+dokuwiki_group: nginx
+
+dokuwiki_name: dokuwiki
+dokuwiki_plugins_remove:
+  - name: authad
+  - name: authldap
+  - name: authmysql
+  - name: authpdo
+  - name: authpgsql
+  - name: info
+  - name: popularity
+dokuwiki_provision: false
+dokuwiki_savedir: /var/www/html/data
+
+# Template parameters (will only be used when dokuwiki_provision is true)
+dokuwiki_acl_all: 0
+dokuwiki_acl_user: 8
+dokuwiki_disableactions: "register"
+dokuwiki_local:
+  - name: "['passcrypt']"
+    value: 'bcrypt'
+dokuwiki_title: "default Dokuwiki site"

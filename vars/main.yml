@@ -1,0 +1,19 @@
+---
+# vars file for bcacheira.dokuwiki
+dokuwiki_dependencies:
+  - javascript-common
+  - libjs-jquery
+  - libjs-jquery-cookie
+  - libjs-jquery-ui
+  - libphp-simplepie
+  - php
+  - php-geshi
+  - php-seclib
+  - php-xml
+  - ucf
+
+dokuwiki_recommendations:
+  - imagemagick
+  - php-gd
+  - php-ldap
+  

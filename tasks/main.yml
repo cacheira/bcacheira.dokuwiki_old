@@ -1,0 +1,51 @@
+---
+# tasks file for bcacheira.dokuwiki
+
+- name: Install Required Dependencies
+  become: true
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ dokuwiki_dependencies + dokuwiki_recommendations }}"
+
+- name: Create the Base dir
+  file:
+    path: "{{ dokuwiki_basedir }}"
+    group: "{{ dokuwiki_group }}"
+    owner: "{{ dokuwiki_user }}"
+    mode: "0770"
+    state: directory 
+
+- name: Download and extract Dokuwiki Stable
+  become: true
+  unarchive:
+    src: "{{ dokuwiki_stable_url }}"
+    remote_src: yes
+    dest: "{{ dokuwiki_basedir }}"
+    extra_opts: ['--strip-components=1'] # remove first dir
+    group: "{{ dokuwiki_group }}"
+    owner: "{{ dokuwiki_user }}"
+  when: dokuwiki_version == "stable"
+
+- name: Download and extract Dokuwiki Old Stable
+  become: true
+  unarchive:
+    src: "{{ dokuwiki_old_stable_url }}"
+    remote_src: yes
+    dest: "{{ dokuwiki_basedir }}"
+    extra_opts: ['--strip-components=1'] # remove first dir
+    group: "{{ dokuwiki_group }}"
+    owner: "{{ dokuwiki_user }}"
+  when: dokuwiki_version == "old_stable"
+
+- name: Download and extract Dokuwiki Development
+  become: true
+  unarchive:
+    src: "{{ dokuwiki_development_url }}"
+    remote_src: yes
+    dest: "{{ dokuwiki_basedir }}"
+    extra_opts: ['--strip-components=1'] # remove first dir
+    group: "{{ dokuwiki_group }}"
+    owner: "{{ dokuwiki_user }}"
+  when: dokuwiki_version == "development"
+

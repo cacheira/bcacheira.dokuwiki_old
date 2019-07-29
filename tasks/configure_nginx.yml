@@ -1,0 +1,19 @@
+---
+    
+- name: Configure nginx to host Dokuwiki
+  template:
+    src: dokuwiki.nginx.conf.j2
+        dest: "/etc/nginx/sites-available/{{ dokuwiki_name }}.conf"
+        owner: root
+        group: root
+        mode: "0640"
+    notify:
+      - restart 
+
+  - name: Enable the site
+    command:
+      a2ensite {{ dokuwiki_name }}.conf
+    notify:
+      - restart apache2
+
+  when: dokuwiki_configure_apache2 is defined and dokuwiki_configure_apache2
